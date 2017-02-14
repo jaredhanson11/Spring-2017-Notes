@@ -1,16 +1,11 @@
-# 6.033: Recitation 2
-- **missed recitation 1 bc of snow day**
-
-## Pre-Recitation
-
-### Reading: Section 4.4
+# Reading: Section 4.4
 
 Questions to think of while reading:
 - What is the benefit of a recursive query?
 - What are the benefits of DNS's hierarchical design?
 - Are there any drawbacks to DNS's design?
 
-#### 4.4 Case Study: DNS
+## 4.4 Case Study: DNS
 - Good example of successful implementation of naming scheme
 - DNS designed for computer, but is general-purpose name management and name
     resolution sysstem
@@ -45,7 +40,7 @@ Questions to think of while reading:
                 take hours to propogate through internet
 
 
-##### 4.4.1: Name Resolution in DNS
+### 4.4.1: Name Resolution in DNS
 
 DNS coulda been thought up in three ways:
 
@@ -125,7 +120,7 @@ __More on DNS Protocol__
     - increases future access time
     - cache records go out of date, usually based on expiration
 
-##### 4.4.2: Hierarchical Name Management
+### 4.4.2: Hierarchical Name Management
 - __naming authority__: handler of name server
     - may add/remove/change authoritative records to that name server
     - if `com.` authority gave you binding to `jared.com.`
@@ -134,7 +129,7 @@ __More on DNS Protocol__
         - this is because you are naming authority at `jared.com.`, and any
             naming server will eventually request any `jared.com.` to your
             records
-##### 4.4.3: Other Features of DNS
+### 4.4.3: Other Features of DNS
 - replicating DNS servers
     - DNS requires all organizations that run a service to have at least two
     identical replica servers
@@ -176,7 +171,7 @@ __More on DNS Protocol__
            - entire basis of AWS
            - allows multiple names to point to one machine
 
-##### 4.4.4: Name Discovery in DNS
+### 4.4.4: Name Discovery in DNS
 __Name Discovery__
 - three places in DNS
     1. client discover name of nearby name server
@@ -199,71 +194,9 @@ __Name Discovery__
         - solved with configuration parameter
             - maybe to make it a valid request that will just fail
 
-##### 4.4.5: Trustworthiness of DNS Responses
+### 4.4.5: Trustworthiness of DNS Responses
 - shortcoming of DNS
     - no authentication of responses
         - results in easily allowing man in the middle attacks
 
-### Write-up
-- What is the purpose of DNS?
-    - DNS is a protocol that allows clients to resolve computer addresses from
-        domain names.
-- How does it work?
-    - It works by distributing lookup tables across many name servers
-- Why was it designed to work that way?
 
-## Recitation
-
-Karen Sollins - sollins@scail.mit.edu
-
-### Complexity
-
-- client server model
-    - model designed to provide modularity
-    - gives better seperation of concerns
-    - __naming__
-        - question: two different way to invoke local call?
-            - call by __value__
-                - upsides
-                    - no interference (mutations to object aren't dangerous)
-                - usually will pass by value in distributed environment
-            - call by __reference__
-                - upsides
-                    - no memory
-        - names in everday life
-            - filenames
-            - urls
-            - directories
-
-### Naming
-
-#### DNS
-- `Record <-- DNS_RESOLVE(value)`
-- `DNS_RESOLVE` returns
-    - a record
-        - types:
-            - NS_RECORD
-                - name server record
-            - RECORD
-            - REFERALL
-            - CNAME
-            - ERROR
-            - etc.
-
-#### Design choices:
-
-1. Name Assignment
-    - authority: who gets to give names
-        - assigning allows for distributed name assignments
-        - allowing client to select name requires one central __naming authority__
-    - structure/form
-        - domain name has hierarchical components
-        - human name is set of letters without much form besides common names
-2. Name Mapping
-    - performance
-        - is distributing scalable
-            - keeping namine authority constant
-        - name mapping procedure fast
-    - authority
-        - resolution for information
-            - who even knows the right mapping
