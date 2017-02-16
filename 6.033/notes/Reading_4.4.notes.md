@@ -102,7 +102,7 @@ DNS coulda been thought up in three ways:
 
 ![alt text](./imgs/dns-diagram.jpeg)
 
-__More on DNS Protocol__
+__More on DNS Protocol__  
 1. don't have to send every initial request to root name server
     - DNS_RESOLVE can send to any name server it knows the IP of
     - name server doesn't care where request came from
