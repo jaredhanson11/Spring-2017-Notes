@@ -1,0 +1,98 @@
+<h1>Recitation: Eraser</h1>
+<p>Jared Hanson<br />
+02/28/17</p>
+<h2>Pre-Recitation</h2>
+<ul>
+<li>What are the goals of Eraser?<ul>
+<li>Eraser is used to detect race conditions in multithreaded programs.</li>
+<li>It is also designed to be more efficient than prior methods.</li>
+<li>It is also designed to be more thorough in detection than prior
+    methods of debugging.</li>
+</ul>
+</li>
+<li>How was it designed to meet those goals?<ul>
+<li>Uses lockset algorithm.<ul>
+<li>Makes sure that every shared varaible is protected by some lock.</li>
+<li>Does so by monitoring all the reads and writes of a program.</li>
+</ul>
+</li>
+<li>Eraser takes a binary program and returns a new binary that has added calls to
+    Eraser to implement Lockset algorithm at runtime.</li>
+</ul>
+</li>
+<li>Why do we need a tool like Eraser? (Or why do the authors believe that we need
+    such a tool?)<ul>
+<li>Race conditions are very hard to find and can takes months to track down
+    in a real code base</li>
+<li>Race conditions often times are hard to find naturally, and only occur in
+    unique conditions that may be very difficult to find/replicate.</li>
+<li>First dynamic race detection tool applied to production servers.</li>
+</ul>
+</li>
+</ul>
+<h2>Recitation</h2>
+<h3>Eraser</h3>
+<ul>
+<li>Not looking for perfection when checking race conditions.<ul>
+<li>mostly worried about common cases</li>
+</ul>
+</li>
+<li>convince people to use new big efficient computer</li>
+<li>does not recreate the bug</li>
+<li>when variable comes into existence<ul>
+<li>create set of locks for it of all available locks</li>
+<li>objective:<ul>
+<li>make sure whenever var is trying to be accessed, there is at least
+    one lock set on the variable</li>
+<li>is there situation where variable is accessed, but no lock protects it</li>
+</ul>
+</li>
+<li>intersect two sets, idk where/how????</li>
+<li>if null set of locks, then there is an error</li>
+</ul>
+</li>
+<li>can have false positives:<ul>
+<li>many readers/ 1 writer</li>
+<li>initialization of variables</li>
+<li>many readers/ no writers</li>
+</ul>
+</li>
+<li>making Eraser better<ul>
+<li>introduced states<ul>
+<li>virgin state, --&gt; new thread, r/w<ul>
+<li>exclusive state --&gt; new thread, read only<ul>
+<li>shared state --&gt; read write<ul>
+<li>shared-modified state</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>exclusive state --&gt; new thread, write<ul>
+<li>shared-modified state</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Why hard to find race conditions?<br />
+- Timing can be random
+- Reproducing the bug is extremely hard to do</p>
+<p>In class Question<br />
+Threads<br />
+- pros
+    - web servers replying to many clients
+    - progress bars, sharing data
+- cons
+    - locks become really complicated</p>
+<p>Eraser<br />
+- pros
+    - all testing tools are useful
+    - any amount of bugs caught are very useful
+    - can't really hurt
+- cons
+    - false positives are extra work
+    - if not many locks then doesn't make sense</p>
