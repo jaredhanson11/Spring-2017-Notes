@@ -12,5 +12,5 @@ Tester 1:
 - clicking next excersise, after finishing game, but don't know what the next
   excersise is
 - don't tell them the idea behind the cards, and just try to have them find the
-  cards themselves
+  cards themselves (about our shitty demo lol)
 - didn't think images motivated her, but maybe for young kids it would?
